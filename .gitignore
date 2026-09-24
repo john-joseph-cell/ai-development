@@ -1,0 +1,15 @@
+node_modules/
+.next/
+.vercel/
+.env
+.env.*
+!.env.example
+dist/
+build/
+out/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+.turbo/
+.cache/
