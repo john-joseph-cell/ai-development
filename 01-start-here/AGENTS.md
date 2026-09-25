@@ -4,61 +4,306 @@ Read `01-start-here/HOW-TO-BUILD.md` if the user asks how to develop.
 
 Before any code or architecture change, read in order:
 
-- `03-your-product/project-overview.md`
-- `03-your-product/architecture.md`
-- `03-your-product/ui-context.md`
-- `03-your-product/code-standards.md`
-- `03-your-product/progress-tracker.md`
-- `03-your-product/00-build-plan.md`
+* `03-your-product/project-overview.md`
+* `03-your-product/architecture.md`
+* `03-your-product/ui-context.md`
+* `03-your-product/code-standards.md`
+* `03-your-product/progress-tracker.md`
+* `03-your-product/00-build-plan.md`
 
 Then read the matching persona:
 
-- Frontend work → `03-your-product/frontend-prompt.md`
-- Backend work → `03-your-product/backend-prompt.md`
-- Both → read both
+* Frontend work → `03-your-product/frontend-prompt.md`
+* Backend work → `03-your-product/backend-prompt.md`
+* Both → read both
+
+# Project Blueprint Law
+
+For a new project, the AI must first establish a sufficiently complete **Project Blueprint** before making downstream implementation decisions.
+
+The Project Blueprint is the complete product-level understanding that connects the user's idea to the product-truth files in `03-your-product`.
+
+The blueprint is not a frontend prompt, backend prompt, architecture document, or build plan.
+
+It answers:
+
+* What are we building?
+* Why are we building it?
+* Who is it for?
+* What problem does it solve?
+* What outcomes must it produce?
+* What can users and system actors actually do?
+* How do the important workflows behave from beginning to end?
+* What business rules govern those workflows?
+* What states and lifecycle transitions exist?
+* What information must exist and move through the system?
+* What external dependencies exist?
+* What can go wrong?
+* How does the system recover?
+* What are the limitations and constraints?
+* What assumptions are being made?
+* What risks exist?
+* How will success be recognized or tested?
+* What belongs in the current scope and what does not?
+
+## Blueprint Coverage
+
+Establish, where applicable:
+
+* product identity
+* problem definition
+* target users and actors
+* responsibilities and permissions
+* goals and desired outcomes
+* value proposition
+* scope and non-goals
+* capabilities and feature purpose
+* complete end-to-end workflows
+* business rules
+* entity lifecycles
+* important state transitions
+* data and information requirements
+* external services and dependencies
+* security and trust boundaries
+* failure behavior
+* recovery behavior
+* cancellation behavior
+* retry behavior
+* timeout behavior
+* partial-completion behavior
+* concurrency considerations
+* scale and usage expectations when material
+* platform and device requirements
+* localization requirements
+* accessibility requirements
+* notifications and communication
+* payments and financial behavior when applicable
+* content lifecycle when applicable
+* administration and operational requirements
+* quality requirements
+* measurable or testable success criteria
+* limitations
+* constraints
+* assumptions
+* unknowns
+* risks and mitigations
+* decisions and trade-offs
+* validation and acceptance requirements
+* MVP boundaries
+* future-phase boundaries
+
+Do not force irrelevant categories into a project.
+
+The blueprint must be appropriate to the actual product.
+
+## Blueprint Truth Categories
+
+Throughout discovery, distinguish clearly between:
+
+* Confirmed fact
+* User requirement
+* Assumption
+* Unknown
+* Constraint
+* Decision
+* Risk
+* Recommendation
+* Out of Scope
+
+Never silently convert an assumption into a confirmed requirement.
+
+Never invent missing requirements to make the project appear complete.
+
+## Blueprint Gate
+
+Before moving from product discovery into downstream project-truth generation, verify that:
+
+* the problem is understood
+* the intended outcome is understood
+* meaningful users and actors are identified
+* responsibilities and permissions are understood where relevant
+* scope and non-goals are explicit
+* major capabilities have a reason to exist
+* important end-to-end workflows are understood
+* important business rules are identified
+* important state transitions are understood
+* required data and information are identified
+* required integrations and dependencies are identified
+* important security and trust boundaries are understood
+* important failure and recovery behavior is understood
+* meaningful limitations and constraints are visible
+* assumptions and unknowns are visible
+* significant risks are identified
+* success can be observed or tested
+
+Do not require unnecessary detail simply to satisfy a checklist.
+
+A blueprint is complete enough when the next project decision can be made responsibly without guessing about material product behavior.
+
+## Blueprint Before Architecture
+
+Do not choose architecture merely because a technology is popular or advanced.
+
+Architecture must follow:
+
+* confirmed product behavior
+* workflows
+* business rules
+* state transitions
+* data requirements
+* security requirements
+* reliability requirements
+* scale requirements
+* external dependencies
+* confirmed constraints
+
+Do not introduce:
+
+* databases
+* queues
+* caches
+* separate services
+* AI systems
+* authentication systems
+* payment systems
+* event buses
+* infrastructure layers
+
+unless the product actually requires them or the user explicitly mandates them.
+
+## Blueprint Before UI
+
+Do not allow visual design to redefine product behavior.
+
+The visual system must represent the confirmed:
+
+* users
+* information architecture
+* capabilities
+* workflows
+* states
+* permissions
+* product priorities
+
+A design direction is not permission to invent features.
+
+## Blueprint Before Build Plan
+
+Build jobs must come from confirmed in-scope product work.
+
+Do not create jobs merely because:
+
+* a framework requires a file
+* a library exists
+* a fashionable pattern is available
+* a generic SaaS usually has the feature
+* the AI thinks the product "should" have it
+
+Respect product dependencies and workflow dependencies when ordering jobs.
+
+## Blueprint Change Control
+
+When new information changes the project, identify its effect on:
+
+* product scope
+* users or actors
+* workflows
+* business rules
+* states
+* data
+* dependencies
+* security
+* reliability
+* architecture
+* UI behavior
+* standards
+* build jobs
+* risks
+* constraints
+* assumptions
+
+Do not silently change downstream truth.
+
+Preserve valid existing decisions.
+
+Update only affected truth and dependent documents.
+
+If a change creates a contradiction, resolve it before implementing the affected behavior.
+
+## Blocking vs Non-Blocking Unknowns
+
+When information is missing:
+
+### Blocking
+
+If the missing information could materially change:
+
+* product behavior
+* scope
+* architecture
+* security
+* data model
+* permissions
+* workflow
+* financial behavior
+* another important system decision
+
+record it as an open question in `03-your-product/progress-tracker.md` and stop the affected work.
+
+### Non-Blocking
+
+If the missing information does not materially affect the current decision:
+
+* make the smallest reasonable assumption
+* label it explicitly
+* continue
+* preserve it so it can be revisited later
+
+Never invent a material answer.
 
 # Hard rules
 
-- One job at a time. The job is the first unfinished name in `03-your-product/00-build-plan.md`
-- Do not invent product behavior. Missing fact → open question in `03-your-product/progress-tracker.md` and stop
-- Do not push a red build. Lint, types, relevant tests, and the production build must be green
-- Do not commit secrets. Env lives on Vercel
-- Live proof is the Vercel production URL. Never localhost. Follow `05-slash-commands/live.md`. If GitHub repo URL or Vercel URL is missing, ask the user and write it into `03-your-product/architecture.md` Host
-- `/debug`, `/verify`, `/audit`, and `/ship` always use their permanent `*-prompt.md`. Do not generate replacements
-- Commands push only authorized green project changes, never red or empty commits; live proof then comes from Vercel
-- All frontend prompt law lives in `04-always-on-rules/frontend-prompt.md`; generated frontend work follows `03-your-product/frontend-prompt.md`
-- All backend prompt law lives in `04-always-on-rules/backend-prompt.md`; generated backend work follows `03-your-product/backend-prompt.md`
-- Do not replace this file or the root `AGENTS.md` with a stack dump
-- App source lives only in the project folder named in `03-your-product/architecture.md` (Host → Project folder). Never write the app into the discipline root. Never overwrite the discipline `README.md`
-- If `IMPROVE.md` or `{project-name}/IMPROVE.md` has new paste text, follow **New feature later** in `01-start-here/HOW-TO-BUILD.md`. Do not start from idea again
-- `/brief` and the idea prompt never create a GitHub repo. `/ship` never creates a GitHub repo. The repo is created only after `03-your-product` is real, for the project folder only
-- Git workflow: pull → status → stage explicitly → commit with intent → safety pull → push. Never `git push --force`. Never leave uncommitted changes while pulling. Never commit secrets. See `01-start-here/HOW-TO-BUILD.md` → Git workflow
-- Check pass-through: if the previous command in this session already ran lint, typecheck, tests, and production build with all passing, and no source files changed since, the next command skips re-running those checks. Same for git status and push
-- `/verify` marks the recipe status as Done in `03-your-product/00-build-plan.md` and fills deployed commit and verified URL when it returns PASS
-- Full-stack feature pairing: if the project has both frontend and backend, work one feature at a time. Frontend job first (all commands through `/verify`), then backend job for the same feature (all commands through `/verify`), then a manual test checklist is generated in `progress-tracker.md`. User tests on the Vercel URL. Issue → `/debug`. All clear → `/ship`. Frontend-only projects skip this rule
+* One job at a time. The job is the first unfinished name in `03-your-product/00-build-plan.md`
+* Do not invent product behavior. Missing fact → open question in `03-your-product/progress-tracker.md` and stop
+* Do not push a red build. Lint, types, relevant tests, and the production build must be green
+* Do not commit secrets. Env lives on Vercel
+* Live proof is the Vercel production URL. Never localhost. Follow `05-slash-commands/live.md`. If GitHub repo URL or Vercel URL is missing, ask the user and write it into `03-your-product/architecture.md` Host
+* `/debug`, `/verify`, `/audit`, and `/ship` always use their permanent `*-prompt.md`. Do not generate replacements
+* Commands push only authorized green project changes, never red or empty commits; live proof then comes from Vercel
+* All frontend prompt law lives in `04-always-on-rules/frontend-prompt.md`; generated frontend work follows `03-your-product/frontend-prompt.md`
+* All backend prompt law lives in `04-always-on-rules/backend-prompt.md`; generated backend work follows `03-your-product/backend-prompt.md`
+* Do not replace this file or the root `AGENTS.md` with a stack dump
+* App source lives only in the project folder named in `03-your-product/architecture.md` (Host → Project folder). Never write the app into the discipline root. Never overwrite the discipline `README.md`
+* If `IMPROVE.md` or `{project-name}/IMPROVE.md` has new paste text, follow **New feature later** in `01-start-here/HOW-TO-BUILD.md`. Do not start from idea again
+* `/brief` and the idea prompt never create a GitHub repo. `/ship` never creates a GitHub repo. The repo is created only after `03-your-product` is real, for the project folder only
+* Git workflow: pull → status → stage explicitly → commit with intent → safety pull → push. Never `git push --force`. Never leave uncommitted changes while pulling. Never commit secrets. See `01-start-here/HOW-TO-BUILD.md` → Git workflow
+* Check pass-through: if the previous command in this session already ran lint, typecheck, tests, and production build with all passing, and no source files changed since, the next command skips re-running those checks. Same for git status and push
+* `/verify` marks the recipe status as Done in `03-your-product/00-build-plan.md` and fills deployed commit and verified URL when it returns PASS
+* Full-stack feature pairing: if the project has both frontend and backend, work one feature at a time. Frontend job first (all commands through `/verify`), then backend job for the same feature (all commands through `/verify`), then a manual test checklist is generated in `progress-tracker.md`. User tests on the Vercel URL. Issue → `/debug`. All clear → `/ship`. Frontend-only projects skip this rule
 
 # Commands
 
 When the user types a slash command, read that file and do only what it says.
 
-- `/brief` → `05-slash-commands/brief.md`
-- `/architect` → `05-slash-commands/architect.md`
-- `/develop` → `05-slash-commands/develop.md`
-- `/verify` → `05-slash-commands/verify.md`
-- `/debug` → `05-slash-commands/debug.md`
-- `/audit` → `05-slash-commands/audit.md`
-- `/ship` → `05-slash-commands/ship.md`
-- Live URL and push rules → `05-slash-commands/live.md`
+* `/brief` → `05-slash-commands/brief.md`
+* `/architect` → `05-slash-commands/architect.md`
+* `/develop` → `05-slash-commands/develop.md`
+* `/verify` → `05-slash-commands/verify.md`
+* `/debug` → `05-slash-commands/debug.md`
+* `/audit` → `05-slash-commands/audit.md`
+* `/ship` → `05-slash-commands/ship.md`
+* Live URL and push rules → `05-slash-commands/live.md`
 
 The command routers call these permanent prompts:
 
-- `/debug` → `debug-prompt.md`
-- `/verify` → `verify-prompt.md`
-- `/audit` → `audit-prompt.md`
-- `/ship` → `ship-prompt.md`
+* `/debug` → `debug-prompt.md`
+* `/verify` → `verify-prompt.md`
+* `/audit` → `audit-prompt.md`
+* `/ship` → `ship-prompt.md`
 
 # After each job
 
-- Update `03-your-product/progress-tracker.md`
-- If stack, UI, or scope changed, update that file in `03-your-product` before the next job
-- For full-stack features: after both frontend and backend jobs are verified, ensure the manual test checklist in `progress-tracker.md` is complete before `/ship`
+* Update `03-your-product/progress-tracker.md`
+* If stack, UI, or scope changed, update that file in `03-your-product` before the next job
+* For full-stack features: after both frontend and backend jobs are verified, ensure the manual test checklist in `progress-tracker.md` is complete before `/ship`
+* If implementation reveals a previously unknown product requirement or workflow, do not silently invent it. Record the open question or required decision in `progress-tracker.md` and reconcile the affected project-truth files before continuing

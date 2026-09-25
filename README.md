@@ -8,16 +8,104 @@ One product truth. One job at a time. Green build. Push. Prove it on Vercel.
 
 No idea yet. Starting fresh.
 
+## Project Blueprint
+
+Before choosing the stack, theme, coding standards, or build jobs, establish the complete project blueprint.
+
+The blueprint is the project's product-level source of truth. It must understand the project before implementation decisions are made.
+
+The blueprint flow establishes:
+
+1. Product identity and problem
+2. Target users, actors, and responsibilities
+3. Goals, outcomes, and value
+4. Scope and explicit non-goals
+5. Core capabilities and feature purpose
+6. Complete end-to-end workflows
+7. Business rules and permissions
+8. Entity lifecycles and important state transitions
+9. Data and information requirements
+10. External services and dependencies
+11. Security and trust boundaries
+12. Failure, recovery, cancellation, retry, timeout, and partial-completion behavior
+13. Scale and usage expectations where they materially affect the project
+14. Platform, device, localization, and accessibility requirements
+15. Notifications and communication behavior
+16. Payments and financial behavior when applicable
+17. Content lifecycle when applicable
+18. Administration and operational requirements
+19. Quality requirements and measurable success criteria
+20. Known limitations and constraints
+21. Assumptions and unknowns
+22. Risks and mitigation
+23. Important architectural/product decisions and trade-offs
+24. Validation and acceptance requirements
+25. MVP, later phases, and explicit future scope
+
+The blueprint must distinguish:
+
+- confirmed facts
+- assumptions
+- unknowns
+- constraints
+- decisions
+- risks
+- recommendations
+- out-of-scope work
+
+Do not jump from an idea directly to code.
+
+Do not invent missing requirements.
+
+Do not select technologies during product discovery unless explicitly required.
+
+When the blueprint is sufficiently complete, use it to generate the six product-truth files below.
+
 ## Files to fill (in order)
 
-1. `02-fill-these-prompts/01-idea.md` → replaces `03-your-product/project-overview.md`
+The six files are generated only after the Project Blueprint has been established.
+
+1. `02-fill-these-prompts/01-idea.md` → converts the confirmed blueprint into `03-your-product/project-overview.md`
 2. `02-fill-these-prompts/02-stack.md` → choose backend names → replaces `03-your-product/architecture.md`
 3. `02-fill-these-prompts/03-theme.md` → choose frontend names → replaces `03-your-product/ui-context.md`
 4. `02-fill-these-prompts/04-standards.md` → replaces `03-your-product/code-standards.md`
-5. `02-fill-these-prompts/05-jobs.md` → replaces `03-your-product/00-build-plan.md`
+5. `02-fill-these-prompts/05-jobs.md` → converts the product truth into `03-your-product/00-build-plan.md`
 6. `02-fill-these-prompts/06-personas.md` → copies selected sections into `03-your-product/frontend-prompt.md` and `03-your-product/backend-prompt.md`
 
+### Blueprint rule
+
+`02-fill-these-prompts/01-idea.md` is not a shortcut around project discovery.
+
+It must use the complete Project Blueprint established during discovery.
+
+The resulting `project-overview.md` must preserve the blueprint's actual product intent, scope, workflows, rules, constraints, limitations, assumptions, and success criteria without inventing missing facts.
+
+Or paste `Idea-Prompt` to run the complete blueprint/discovery flow, or run `/brief` to execute the product-truth pipeline.
+
 Or paste `Idea-Prompt` to run the full interview, or run `/brief` to do all six in order.
+
+# Blueprint completion gate
+
+Do not move into architecture, theme, standards, jobs, repository setup, or application development until the blueprint is sufficiently understood.
+
+At minimum, verify:
+
+- problem and intended outcome are clear
+- meaningful users/actors are identified
+- scope and non-goals are explicit
+- core workflows are understood
+- important business rules are identified
+- important states and lifecycle transitions are understood
+- required data and dependencies are identified
+- security and trust boundaries are understood
+- important failure and recovery behavior is identified
+- limitations and constraints are explicit
+- assumptions and unknowns are visible
+- major risks are identified
+- success is observable or testable
+
+Do not require every possible detail for a small project. The blueprint must be complete enough for responsible downstream decisions without forcing unnecessary complexity.
+
 
 ## After files are filled
 
